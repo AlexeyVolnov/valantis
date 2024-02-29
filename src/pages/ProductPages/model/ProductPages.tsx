@@ -1,6 +1,6 @@
 import {FC} from "react";
 import ProductList from "../../../entities/ProductList/model/ProductList.tsx";
-import style from 'productPages.module.scss'
+import style from './productPages.module.scss'
 
 interface IProductPagesProps {
 

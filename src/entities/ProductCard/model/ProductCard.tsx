@@ -1,6 +1,5 @@
 import {FC} from "react";
-import style from 'productCard.module.scss'
-
+import style from '../model/productCard.module.scss'
 interface IProductCardProps {
 	productId: string,
 	name: string,

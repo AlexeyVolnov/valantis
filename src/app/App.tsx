@@ -1,4 +1,4 @@
-import './App.css'
+import style from './App.module.scss'
 import axios from 'axios'
 import md5 from 'md5'
 import ProductPages from "../pages/ProductPages/model/ProductPages.tsx";
@@ -12,7 +12,7 @@ function App() {
 	const xAuth = md5(`${password}_${timestamp}`)
 
 
-	async function getData(Auth) {
+	async function getData(Auth:string) {
 		const data = await axios.post('http://api.valantis.store:40000/',
 				{
 					action: 'get_ids',
@@ -23,7 +23,7 @@ function App() {
 
 				}, {
 					headers: {
-						"X-Auth": xAuth
+						"X-Auth": Auth
 					}
 				})
 		console.log(data.data.result)
@@ -32,7 +32,7 @@ function App() {
 	getData(xAuth)
 
 	return (
-			<div>
+			<div className={style.app}>
 				 <ProductPages/>
 			</div>
 	)

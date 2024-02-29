@@ -16,6 +16,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/md5": "^2.3.5",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
@@ -24,10 +25,13 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "node-sass": "^9.0.0",
+    "postcss": "^8.4.27",
     "sass": "^1.71.1",
+    "sass-loader": "^14.1.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
-    "node-sass": "^9.0.0",
-    "postcss": "^8.4.27"
+    "@types/node": "^20.4.10",
+    "autoprefixer": "^10.4.16"
   }
 }
