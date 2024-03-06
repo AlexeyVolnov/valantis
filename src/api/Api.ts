@@ -1,12 +1,13 @@
 import md5 from "md5";
 import axios from "axios";
+import {T_get_idsParams, T_get_itemsParams} from "./typeApi.ts";
 
 class Api {
 	private readonly password: string;
 	private readonly timestamp: string;
-	public auth: string;
-	public headers: {};
-	public baseUrl: string
+	private readonly auth: string;
+	private readonly headers: {};
+	private readonly baseUrl: string
 
 	constructor() {
 		this.password = 'Valantis';
@@ -18,24 +19,28 @@ class Api {
 				"X-Auth": this.auth
 			}
 		}
-
 	}
 
-	getListId(params:getIdsParams) {
-		const getListId = axios.post(ApiValantis.baseUrl, {action: 'get_ids', params,}, ApiValantis.headers)
-		return getListId
+	getIds(params: T_get_idsParams) {
+		return axios.post(ApiValantis.baseUrl, params, ApiValantis.headers)
 	}
-	getListProduct(params){
-		const getListProduct = axios.post(ApiValantis.baseUrl, {action:"get_items", params,}, ApiValantis.headers)
-		return getListProduct
+
+	getListProduct(arrayIds: string[]) {
+		return axios.post(ApiValantis.baseUrl, {action: "get_items", params: {ids: arrayIds}}, ApiValantis.headers)
+	}
+
+	async getProduct(params: T_get_idsParams) {
+		const getIds = await this.getIds(params)
+		if (getIds.statusText === 'OK') {
+			const productList = await this.getListProduct(getIds.data.result)
+			if (productList.statusText === "OK") {
+				return productList.data.result
+			}
+		}
 	}
 
 }
 
 const ApiValantis = new Api()
-export default ApiValantis
 
-type getIdsParams = {
-	offset: number,
-	limit: number
-}
+export default ApiValantis

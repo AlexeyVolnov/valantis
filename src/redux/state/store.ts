@@ -9,8 +9,6 @@ export const store = configureStore({
 	reducer: {
 		productListReducer
 	},
-	middleware: getDefaultMiddleware => getDefaultMiddleware(),
-
 })
 
 

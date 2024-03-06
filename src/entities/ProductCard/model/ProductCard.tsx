@@ -1,20 +1,18 @@
 import {FC} from "react";
 import style from '../model/productCard.module.scss'
+import {T_Product} from "../../../api/typeApi.ts";
 interface IProductCardProps {
-	productId: string,
-	name: string,
-	brand: string,
-	price:number
+	product:T_Product
 }
 
 
-const ProductCard: FC<IProductCardProps> = ({productId,brand,name,price}) => {
+const ProductCard: FC<IProductCardProps> = ({product}) => {
 	return (
 			<div className={style.productCard}>
-				<div className={style.name}>{name}</div>
-				<div className={style.price}>{price}</div>
-				<div className={style.productId}>{productId}</div>
-				<div className={style.brand}>{brand}</div>
+				<div className={style.name}>{product.product}</div>
+				<div className={style.price}>{product.price}</div>
+				<div className={style.productId}>{product.id}</div>
+				<div className={style.brand}>{product.brand}</div>
 			</div>
 	)
 }

@@ -1,0 +1,14 @@
+.header {
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  min-width: 100vw;
+  gap: 5px;
+  & span{
+    color: #746011;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}

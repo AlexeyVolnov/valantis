@@ -1,22 +1,37 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {typeInitialState} from "./typeProductList.ts";
+import ApiValantis from "../../../api/Api.ts";
+import {T_get_idsParams} from "../../../api/typeApi.ts";
 
 
-type typeProductListInit  = {
-	productList: number[]
+const initialState: typeInitialState = {
+	productList: [],
+	statusGetListProduct: null
 }
 
-const initialState: typeProductListInit = {
-	productList: [5]
-}
+export const getProduct = createAsyncThunk('productList/getProduct',
+		async (params: T_get_idsParams) => (await ApiValantis.getProduct(params))
+)
 
-export const productListReducer = createSlice({
+export const productList = createSlice({
 	initialState,
-	name: '',
+	name: "productListReducer",
 	reducers: {
-		go(){}
+
+	},
+	extraReducers: (builder) => {
+		builder.addCase(getProduct.pending, (state) => {
+			state.statusGetListProduct = "loading"
+		})
+		builder.addCase(getProduct.fulfilled, (state, action) => {
+			state.statusGetListProduct = "fulfilled"
+			state.productList = action.payload
+		})
+		builder.addCase(getProduct.rejected, (state, action) => {
+			state.statusGetListProduct = "error"
+			throw new Error(`ошибка получения списка товаров: ${action?.error.message}`)
+		})
 	}
 })
 
-export default productListReducer.reducer
-
-export const {go} = productListReducer.actions;
+export default productList.reducer
