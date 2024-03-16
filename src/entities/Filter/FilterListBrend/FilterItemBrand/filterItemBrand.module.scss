@@ -1,0 +1,14 @@
+.brand{
+  cursor: pointer;
+  color: #343434;
+  display: flex;
+  gap: 8px;
+  align-content: center;
+  align-items: center;
+}
+.brand:hover{
+  color: #c48700;
+}
+.icon{
+  display: flex;
+}

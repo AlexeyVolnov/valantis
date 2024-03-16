@@ -1,0 +1,12 @@
+.price {
+  width: 100%;
+  border: 1px solid rgba(111, 116, 94, 0.29);
+  padding: 8px 8px;
+  border-radius: 6px;
+  outline: none;
+  margin-top: 10px;
+  &::placeholder{
+    padding: 10px;
+  }
+
+}

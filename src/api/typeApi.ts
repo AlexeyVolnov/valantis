@@ -17,3 +17,9 @@ export type T_Product ={
 	brand: string|null,
 	price:number
 }
+
+export type T_FilterData={
+	price:number,
+	product:string,
+	brand:string
+}

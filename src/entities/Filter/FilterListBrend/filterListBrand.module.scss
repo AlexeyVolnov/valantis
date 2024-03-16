@@ -1,0 +1,8 @@
+.filterListBrand{
+  max-height: 250px;
+  overflow: scroll;
+  overflow-x:hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

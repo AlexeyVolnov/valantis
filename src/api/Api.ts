@@ -1,13 +1,14 @@
 import md5 from "md5";
 import axios from "axios";
-import {T_get_idsParams, T_get_itemsParams} from "./typeApi.ts";
+import {T_get_idsParams} from "./typeApi.ts";
+
 
 class Api {
 	private readonly password: string;
 	private readonly timestamp: string;
-	private readonly auth: string;
-	private readonly headers: {};
-	private readonly baseUrl: string
+	public readonly auth: string;
+	public readonly headers: {};
+	public readonly baseUrl: string
 
 	constructor() {
 		this.password = 'Valantis';
@@ -21,22 +22,31 @@ class Api {
 		}
 	}
 
-	getIds(params: T_get_idsParams) {
-		return axios.post(ApiValantis.baseUrl, params, ApiValantis.headers)
+	async getIds(params: T_get_idsParams):Promise<any> {
+		try {
+			const {data} = await axios.post(ApiValantis.baseUrl, params, ApiValantis.headers)
+			return data
+		} catch (error) {
+			console.log('ошибка получения ids')
+			return this.getIds(params)
+		}
 	}
 
-	getListProduct(arrayIds: string[]) {
-		return axios.post(ApiValantis.baseUrl, {action: "get_items", params: {ids: arrayIds}}, ApiValantis.headers)
-	}
 
+	async getListProduct(arrayIds: string[]):Promise<any> {
+		try {
+			const {data} = await axios.post(ApiValantis.baseUrl, {action: "get_items", params: {ids: arrayIds}}, ApiValantis.headers)
+			return data
+		}catch (error){
+			console.log('ошибка получения товаров')
+			return this.getListProduct(arrayIds)
+		}
+	}
 	async getProduct(params: T_get_idsParams) {
 		const getIds = await this.getIds(params)
-		if (getIds.statusText === 'OK') {
-			const productList = await this.getListProduct(getIds.data.result)
-			if (productList.statusText === "OK") {
-				return productList.data.result
-			}
-		}
+		const productList = await this.getListProduct(getIds.result)
+		return productList.result
+
 	}
 
 }

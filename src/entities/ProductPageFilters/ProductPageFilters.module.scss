@@ -1,6 +1,42 @@
 .filterWrapper {
-  min-width: 30%;
-  min-height: 80%;
-  box-shadow: 1px 1px 10px #e0ece0,-1px -1px 2px #f3eddd;
+  max-width:400px;
+  min-width: 330px;
+  min-height: 80vh;
+  height: 15%;
+  box-shadow: 1px 1px 10px #e2e3e2, -1px -1px 2px #e0dfdc;
+  padding: 50px 15px;
+  background-color: #faf9f9;
+  position: sticky;
+  top: 10%;
+}
 
+
+.filterButtons{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  gap: 10px;
+  & button{
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5%;
+    cursor: pointer;
+  }
+  & button:hover{
+    transition: background-color .2s;
+  }
+  .applyButton{
+    background-color: #166ef1;
+    color: #eae9e9;
+  }
+  .resetButton{
+    background-color: #f8f6f6;
+    border: 1px solid #e0dddd;
+  }
+  .applyButton:hover{
+    background-color: #2e7ef5;
+  }
+  .resetButton:hover{
+    background-color: #f3f2f2;
+  }
 }

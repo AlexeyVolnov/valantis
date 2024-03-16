@@ -3,34 +3,33 @@ import style from './productList.module.scss'
 import {useAppDispatch, useAppSelector} from "../../../redux/state/storeHooks.ts";
 import {getProduct} from "../../../redux/reducers/productListReducer/productListReducer.ts";
 import ProductCard from "../../ProductCard/model/ProductCard.tsx";
-import ProductListLoader from "../ui/ProductListLoader.tsx";
 import {T_Product} from "../../../api/typeApi.ts";
+import ProductCardLoader from "../../ProductCard/ui/ProductCardLoader.tsx";
 
 
-interface IProductListProps {
-
-}
 
 
-const ProductList: FC<IProductListProps> = ({}) => {
+const ProductList: FC = () => {
 	// @ts-ignore
-	const dispath = useAppDispatch();
-	useEffect(() => {
-		dispath(getProduct({action: "get_ids", params: {limit: 10, offset: 1}}));
-	}, [])
-	const {productList, statusGetListProduct} = useAppSelector(state => state.productListReducer)
+	const dispatch = useAppDispatch();
+	const {limit, page,statusGetListProduct,productList} = useAppSelector(state => state.productListReducer)
 
+	useEffect(() => {
+		dispatch(getProduct({action: "get_ids", params: {limit: limit, offset: page * limit}}));
+	}, [page])
+
+	const arraySkeleton = Array.from({length: 10}, (_, index) => index)
 	const filteredOnlyId = (array: T_Product[]): T_Product[] => {
-		const temp: any = []
+		const temp = new Map()
 		return array.filter(prod => (
-				temp.includes(prod.id)
+				temp.has(prod.id)
 						? false
-						: temp.push(prod.id) && true)
+						: temp.set(prod.id, 1) && true)
 		)
 	}
 	return (
 			<div className={style.productList}>
-				{statusGetListProduct === 'loading' && <ProductListLoader length={50}/>}
+				{statusGetListProduct === 'loading' && arraySkeleton.map(skelet => <ProductCardLoader key={skelet}/>)}
 				{statusGetListProduct === 'fulfilled' && filteredOnlyId(productList).map(product =>
 						<ProductCard key={product.id} product={product}/>
 				)
