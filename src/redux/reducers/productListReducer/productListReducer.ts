@@ -22,7 +22,6 @@ export const getProduct = createAsyncThunk('productList/getProduct',
 export const fetchProductFilter = createAsyncThunk('productFilterReducer/fetchProductFilter',
 		async (filter:Partial<T_filter>) => {
 			const {result} = await ApiValantis.getFilterProductIds(filter)
-			console.log(result)
 			const resultFilterList = await 	ApiValantis.getListProduct(result)
 			return resultFilterList.result
 		})

@@ -21,7 +21,6 @@ const ProductPages: FC = () => {
 	return (
 			<div className={style.productPage}>
 				<Header/>
-				<div>kljk</div>
 				<div className={style.content}>
 					<ProductPageFilters/>
 					<ProductList/>

@@ -6,7 +6,7 @@ function App() {
 
 	return (
 			<div className={style.app}>
-				 <ProductPages/>
+				<ProductPages/>
 			</div>
 	)
 }
