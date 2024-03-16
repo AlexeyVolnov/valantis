@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {typeInitialState} from "./typeProductList.ts";
 import ApiValantis from "../../../api/Api.ts";
 import {T_get_idsParams} from "../../../api/typeApi.ts";
-import axios from "axios";
+import {T_filter} from "../productFilterReducer/productFilterReducer.ts";
 
 
 const initialState: typeInitialState = {
@@ -20,12 +20,10 @@ export const getProduct = createAsyncThunk('productList/getProduct',
 )
 
 export const fetchProductFilter = createAsyncThunk('productFilterReducer/fetchProductFilter',
-		async (filter) => {
-			const resultIds = await axios.post(ApiValantis.baseUrl, {
-				"action": "filter",
-				"params": filter
-			}, ApiValantis.headers)
-			const resultFilterList = await 	ApiValantis.getListProduct(resultIds.data.result)
+		async (filter:Partial<T_filter>) => {
+			const {result} = await ApiValantis.getFilterProductIds(filter)
+			console.log(result)
+			const resultFilterList = await 	ApiValantis.getListProduct(result)
 			return resultFilterList.result
 		})
 
@@ -47,10 +45,6 @@ export const productList = createSlice({
 		})
 		builder.addCase(fetchProductFilter.fulfilled, (state, action) => {
 			state.productList = action.payload
-		})
-		builder.addCase(fetchProductFilter.rejected, (_,action) => {
-			console.log(action.payload)
-
 		})
 	}
 })

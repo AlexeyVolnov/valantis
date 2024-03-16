@@ -1,6 +1,7 @@
 import md5 from "md5";
 import axios from "axios";
 import {T_get_idsParams} from "./typeApi.ts";
+import {T_filter} from "../redux/reducers/productFilterReducer/productFilterReducer.ts";
 
 
 class Api {
@@ -32,6 +33,19 @@ class Api {
 		}
 	}
 
+	// @ts-ignore
+	async getFilterProductIds(filter:Partial<T_filter>){
+		try {
+			const {data} = await axios.post(ApiValantis.baseUrl, {
+				"action": "filter",
+				"params": filter
+			}, ApiValantis.headers)
+			return data
+		}catch (error){
+			console.log('ошибка получения товаров')
+			return this.getFilterProductIds(filter)
+		}
+	}
 
 	async getListProduct(arrayIds: string[]):Promise<any> {
 		try {
