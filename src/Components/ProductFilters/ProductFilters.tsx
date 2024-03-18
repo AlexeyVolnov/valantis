@@ -1,5 +1,5 @@
 import {FC} from "react";
-import style from './ProductPageFilters.module.scss'
+import style from './ProductFilters.module.scss'
 import FilterControls from "../Filter/FilterControls/FilterControls.tsx";
 import FilterListPrice from "../Filter/FilterListPrice/FilterListPrice.tsx";
 import FilterListBrand from "../Filter/FilterListBrend/FilterListBrand.tsx";
@@ -10,7 +10,7 @@ import {fetchProductFilter, getProduct} from "../../redux/reducers/productListRe
 
 
 
-const ProductPageFilters: FC = () => {
+const ProductFilters: FC = () => {
 	const dispatch = useAppDispatch()
 	const price = useAppSelector(state=>state.productFilterReducer.price.currentPrice)
 	const name = useAppSelector(state=>state.productFilterReducer.productName)
@@ -49,4 +49,4 @@ const ProductPageFilters: FC = () => {
 	)
 }
 
-export default ProductPageFilters
+export default ProductFilters

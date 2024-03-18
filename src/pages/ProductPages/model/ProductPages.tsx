@@ -1,12 +1,11 @@
 import {FC} from "react";
-import ProductList from "../../../entities/ProductList/model/ProductList.tsx";
+import ProductList from "../../../Components/ProductList/model/ProductList.tsx";
 import style from './productPages.module.scss'
-import Header from "../../../entities/Header/Header.tsx";
-import ProductPageFilters from "../../../entities/ProductPageFilters/ProductPageFilters.tsx";
+import Header from "../../../Components/Header/Header.tsx";
+import ProductFilters from "../../../Components/ProductFilters/ProductFilters.tsx";
 import {useAppDispatch, useAppSelector} from "../../../redux/state/storeHooks.ts";
 import {Pagination, PaginationProps} from 'antd';
 import {paginationOnChange} from "../../../redux/reducers/productListReducer/productListReducer.ts";
-
 const ProductPages: FC = () => {
 	const {page} = useAppSelector(state => state.productListReducer)
 	const price = useAppSelector(state=>state.productFilterReducer.price.currentPrice)
@@ -22,7 +21,7 @@ const ProductPages: FC = () => {
 			<div className={style.productPage}>
 				<Header/>
 				<div className={style.content}>
-					<ProductPageFilters/>
+					<ProductFilters/>
 					<ProductList/>
 				</div>
 				<div className={style.pagination}>
