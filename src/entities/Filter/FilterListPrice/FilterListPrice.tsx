@@ -14,12 +14,12 @@ const FilterListPrice: FC<IFilterListPriceProps> = ({}) => {
 	const dispatch = useAppDispatch()
 
 	const priceHandler = (e:SyntheticEvent<HTMLInputElement>)=>{
-		dispatch(inputPrice(+e.currentTarget.value))
+		dispatch(inputPrice(Number(e.currentTarget.value)))
 	}
 
 	return (
 			<div>
-				<input onChange={priceHandler} className={style.price} value={price} placeholder={"Введите цену"} type="number"/>
+				<input onChange={priceHandler} className={style.price} value={price} placeholder={"Введите цену"} type="text"/>
 			</div>
 	)
 }
