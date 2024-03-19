@@ -5,21 +5,9 @@ export type T_get_idsParams = {
 		limit: number
 	}
 }
-export type T_get_itemsParams = {
-	action:"get_items",
-	params:{
-		ids:string[]
-	}
-}
 export type T_Product ={
 	id: string,
 	product: string,
 	brand: string|null,
 	price:number
-}
-
-export type T_FilterData={
-	price:number,
-	product:string,
-	brand:string
 }
