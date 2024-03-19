@@ -1,29 +1,24 @@
 import {FC, SyntheticEvent} from "react";
 import style from './filterNameProduct.module.scss'
-import {useAppDispatch, useAppSelector} from "../../../redux/state/storeHooks.ts";
-import {inputProductName} from "../../../redux/reducers/productFilterReducer/productFilterReducer.ts";
-
-interface IFilterNameProductProps {
-
-}
+import store from "../../../store/store.ts";
+import {observer} from "mobx-react";
 
 
-const FilterNameProduct: FC<IFilterNameProductProps> = ({}) => {
-	const dispatch = useAppDispatch()
-	const inputHandler = (e: SyntheticEvent<HTMLInputElement>) => {
-		dispatch(inputProductName(e.currentTarget.value))
-	}
-	const inputValue = useAppSelector(state => state.productFilterReducer.productName)
+
+
+const FilterNameProduct: FC = observer(() => {
+
+	const inputValue = store.filter.filterProductName
 	return (
 			<>
 				{<input
-						onChange={inputHandler}
+						onChange={(e:SyntheticEvent<HTMLInputElement>)=>store.setFilterName(e.currentTarget.value)}
 						value={inputValue}
 						className={style.inputNameProduct}
 						placeholder={'Название товара'}
 						type="text"/>}
 			</>
 	)
-}
+})
 
 export default FilterNameProduct

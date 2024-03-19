@@ -1,19 +1,18 @@
 import {FC, memo} from "react";
 import style from './filterItemBrand.module.scss'
-import {useAppDispatch} from "../../../../redux/state/storeHooks.ts";
-import {selectBrand} from "../../../../redux/reducers/productFilterReducer/productFilterReducer.ts";
 import {ImCheckboxChecked, ImCheckboxUnchecked} from "react-icons/im";
+import store from "../../../../store/store.ts";
+import {observer} from "mobx-react";
 
 
 interface IFilterItemBrandProps {
 	brand: { select: boolean, name: string }
 }
 
+const FilterItemBrand: FC<IFilterItemBrandProps> = observer(({brand}) => {
 
-const FilterItemBrand: FC<IFilterItemBrandProps> = ({brand}) => {
-	const dispatch = useAppDispatch()
 	const selectBrandHandler = () => {
-		dispatch(selectBrand(brand.name))
+		store.selectBrand(brand)
 	}
 	return (
 
@@ -23,6 +22,6 @@ const FilterItemBrand: FC<IFilterItemBrandProps> = ({brand}) => {
 			</li>
 
 	)
-}
+})
 
 export default memo(FilterItemBrand)

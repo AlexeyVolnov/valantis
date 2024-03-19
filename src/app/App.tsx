@@ -1,5 +1,5 @@
 import style from './App.module.scss'
-import ProductPages from "../pages/ProductPages/model/ProductPages.tsx";
+import ProductPages from "../pages/ProductPages/ProductPages.tsx";
 
 
 function App() {
