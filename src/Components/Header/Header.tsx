@@ -9,9 +9,10 @@ const Header: FC = ({}) => {
 	return (
 			<div>
 				<header className={style.header}>
-					<TbBrandValorant />
+					<TbBrandValorant/>
 					<span>Valantis</span>
-					<TbBrandValorant />
+					<span>Valantis</span>
+					<TbBrandValorant/>
 				</header>
 			</div>
 	)
